@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 
+sh env-chk.sh
+envCheckRes=$?
+echo "env check process exited with code $envCheckRes"
+if [ $envCheckRes -ne 0 ]; then
+    exit $envCheckRes
+fi 
+
+
 arg=$1
 
 if [ -z $arg ]; then

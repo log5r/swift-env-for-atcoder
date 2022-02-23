@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 
+sh env-chk.sh
+envCheckRes=$?
+echo "env check process exited with code $envCheckRes"
+if [ $envCheckRes -ne 0 ]; then
+    exit $envCheckRes
+fi 
+
+
 arg=$1
 
 if [ $arg ]; then
@@ -11,8 +19,8 @@ testName=$(cat TARGETCONTEST.txt)
 problemNo=$(cat TARGET_PROBLEM.txt)
 testPath="${testName}/${problemNo}"
 
-cppFrom="playground/main.cpp"
-cppTo="${testPath}/main.cpp"
+cppFrom="AtcoderWorkspace/main.swift"
+cppTo="${testPath}/main.swift"
 
 echo "=== start preparing to submit [$testPath] ==="
 echo "copy from : $cppFrom"
@@ -27,8 +35,8 @@ export HERE=`pwd`
 cd $testPath
 
 echo "=== start compile $EXECPATH ==="
-EXECPATH="main.cpp"
-/opt/homebrew/Cellar/gcc/11.2.0_3/bin/g++-11 $EXECPATH
+EXECPATH="main.swift"
+swiftc $EXECPATH
 
 echo "=== start test ==="
 atcoder-tools test
@@ -39,6 +47,6 @@ if [ $testRes -ne 0 ]; then
 fi 
 
 echo "=== start submit ==="
-atcoder-tools submit -u --code ./main.cpp --exec ./a.out
+atcoder-tools submit -u --code ./main.swift
 
 exit 0
