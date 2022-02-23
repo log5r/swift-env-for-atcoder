@@ -36,7 +36,7 @@ cd $testPath
 
 echo "=== start compile $EXECPATH ==="
 EXECPATH="main.swift"
-swiftc $EXECPATH
+swiftc -Ounchecked $EXECPATH
 
 echo "=== start test ==="
 atcoder-tools test

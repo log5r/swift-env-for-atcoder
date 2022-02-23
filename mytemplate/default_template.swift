@@ -38,15 +38,10 @@ func main() {
     func readInt() -> Int { Int(readString())! }
     func readDouble() -> Double { Double(readString())! }
     {{input_part}}
-    _ = solve({{ actual_arguments }})
+    solve({{ actual_arguments }})
     {% else %}
     // Failed to predict input format
     {% endif %}
 }
-
-#if DEBUG
-let caseNumber = 1
-_ = freopen("in_\(caseNumber).txt", "r", stdin)
-#endif
 
 main()
