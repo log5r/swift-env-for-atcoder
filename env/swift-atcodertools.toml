@@ -1,0 +1,25 @@
+[codestyle]
+indent_type='space' # 'tab' or 'space'
+indent_width=4
+template_file='~/atcoder/swift-env/AtcoderWorkspace/mytemplate/default_template.swift'
+workspace_dir='~/atcoder/swift-env/AtcoderWorkspace/'
+lang='swift' # Check README.md for the supported languages.
+### code_generator_file="~/custom_code_generator.py"
+[postprocess]
+### exec_on_each_problem_dir='clang-format -i ./*.cpp'
+### exec_on_contest_dir='touch CMakeLists.txt'
+[compiler]
+compile_command='swiftc -Ounchecked'
+compile_only_when_diff_detected=true
+[tester]
+compile_before_testing=true
+compile_only_when_diff_detected=true
+timeout_adjustment=1.2
+[etc]
+download_without_login=false
+parallel_download=false
+save_no_session_cache=false
+skip_existing_problems=false
+in_example_format="in_{}.txt"
+out_example_format="out_{}.txt"
+
