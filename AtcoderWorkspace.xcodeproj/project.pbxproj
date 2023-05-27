@@ -23,9 +23,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		60C6E181DA7F9D25B5F548E5 /* TARGET_PROBLEM.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TARGET_PROBLEM.txt; sourceTree = SOURCE_ROOT; };
 		60C6E4AEF6E7A997259684A0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		60C6EC21CCDA453CACB11F7E /* AtcoderWorkspace */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AtcoderWorkspace; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C6ED1CA6B695BEAE60B340 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		60C6EF64D4260DCB661E910D /* TARGETCONTEST.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TARGETCONTEST.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				60C6ED1CA6B695BEAE60B340 /* main.swift */,
+				60C6E181DA7F9D25B5F548E5 /* TARGET_PROBLEM.txt */,
+				60C6EF64D4260DCB661E910D /* TARGETCONTEST.txt */,
 			);
 			path = AtcoderWorkspace;
 			sourceTree = "<group>";
