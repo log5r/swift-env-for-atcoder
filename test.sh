@@ -21,10 +21,10 @@ cp $cppFrom $cppTo
 
 echo "=== start compile: $testPath ==="
 sh build_main_source.sh
-cp "./.build/release/AtcoderWorkspace" "$testPath/AtcoderWorkspace"
+cp "./.build/release/main" "$testPath/main"
 
 # process at problem directory
 cd $testPath || exit 9
 
 echo "=== start test: $testPath ==="
-atcoder-tools test -e "./AtcoderWorkspace"
+atcoder-tools test -e "./main"

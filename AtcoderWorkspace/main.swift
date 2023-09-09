@@ -1,15 +1,9 @@
 import Foundation
 
 
-func solve(_ N:Int, _ M:Int, _ D:Int, _ A:[Int], _ B:[Int]) {
-    let sA = A.sorted()
-    var ans = -1
-    for b in B {
-        let idx = sA.upperBound(of: b + D) - 1
-        if idx >= 0 && sA[idx] >= b - D {
-            ans = max(ans, sA[idx] + b)
-        }
-    }
+func solve(_ N:Int, _ M:Int, _ S:String, _ C:[Int]) {
+    var ans = 0
+
     print(ans)
 }
 
@@ -27,19 +21,17 @@ func main() {
     func readDouble() -> Double { Double(readString())! }
     let N = readInt()
     let M = readInt()
-    let D = readInt()
-    var A = [Int](repeating: 0, count: N)
+    let S = readString()
+    var C = [Int](repeating: 0, count: N)
     for i in 0..<N {
-        A[i] = readInt()
+        C[i] = readInt()
     }
-    var B = [Int](repeating: 0, count: M)
-    for i in 0..<M {
-        B[i] = readInt()
-    }
-    solve(N, M, D, A, B)
+    solve(N, M, S, C)
 }
 
 main()
+
+// MARK: Library
 
 extension Array {
     func cumulate(from start: Element, _ method: (Element, Element) -> Element) -> [Element] {
@@ -49,6 +41,12 @@ extension Array {
             res[i + 1] = method(res[i], self[i])
         }
         return res
+    }
+}
+
+extension Array where Element: CustomStringConvertible {
+    func contestDescription(separator: String = " ") -> String {
+        self.map(\.description).joined(separator: separator)
     }
 }
 
@@ -99,7 +97,6 @@ extension Array where Element: Hashable {
         }
     }
 }
-
 extension BinaryInteger {
 
     func binaryDescription(bitWidth: Int? = nil) -> String {
@@ -114,7 +111,6 @@ extension BinaryInteger {
     }
 
 }
-
 extension Comparable {
 
     @discardableResult
@@ -134,12 +130,35 @@ extension Comparable {
         }
         return false
     }
-
+    
 }
-
 extension Int {
+
+    func zeroStartRange() -> Range<Int> { 0..<self }
+    func oneStartRange() -> Range<Int> { 1..<self }
+    func timesLoop(_ f:(Int) -> ()) {
+        for i in 0..<self { f(i) }
+    }
+
     func sqrt() -> Int {
         Int(Double(self).squareRoot())
+    }
+    
+    func prod(_ value: Int, mod: Int? = nil) -> Int {
+        let result: (Int, Int)
+        if value > self { result = (self, value)}
+        else { result = (value, self) }
+        var (a, b) = result
+        var res = 0
+        while b > 0 {
+            if (b & 1) != 0 { res += a }
+            if let m = mod { res %= m }
+            if let m = mod { a %= m }
+            a *= 2
+            if let m = mod { a %= m }
+            b >>= 1
+        }
+        return res
     }
 
     func pow(_ ex: Int, mod: Int? = nil) -> Int {
@@ -170,7 +189,6 @@ extension Int {
         return result.sorted()
     }
 }
-
 extension Character {
     func asciiIntValue() -> Int? {
         guard let ascv = asciiValue else { return nil }
@@ -189,6 +207,7 @@ extension Character {
 
 extension String {
     func values() -> [Character] { Array(self) }
+
     func asciiIntValues() -> [Int]? {
         var res = [Int]()
         for v in values() {
@@ -196,6 +215,16 @@ extension String {
             res.append(vav)
         }
         return res
+    }
+    subscript(_ index: Int) -> Character {
+        get {
+            values()[index]
+        }
+        set {
+            var buf = values()
+            buf[index] = newValue
+            self = String(buf)
+        }
     }
     func bitArray() -> [Bool]? {
         var res = [Bool]()
@@ -207,5 +236,26 @@ extension String {
             }
         }
         return res
+    }
+}
+struct CyclicArray<T> {
+    let array: Array<T>
+    init(_ array: Array<T>) {
+        self.array = array
+    }
+    subscript(index: Int) -> T {
+        let newIndex = ((index % array.count) + array.count) % array.count
+        return array[newIndex]
+    }
+    func arraySlice(fromIndex: Int, count: Int? = nil) -> ArraySlice<T> {
+        let c = count ?? array.count
+        let fi = ((fromIndex % array.count) + array.count) % array.count
+        var lpc = (c / array.count) + 1
+        var buf = array
+        while lpc > 0 {
+            buf += array
+            lpc -= 1
+        }
+        return buf[fi..<(fi + c)]
     }
 }

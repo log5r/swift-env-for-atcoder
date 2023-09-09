@@ -32,14 +32,14 @@ echo "=== start process to test and submit $testPath ==="
 
 export HERE=`pwd`
 
-cd $testPath
-
 echo "=== start compile: $testPath ==="
 sh build_main_source.sh
-cp "./.build/release/AtcoderWorkspace" "$testPath/AtcoderWorkspace"
+cp "./.build/release/main" "$testPath/main"
+
+cd $testPath
 
 echo "=== start test ==="
-atcoder-tools test -e "./AtcoderWorkspace"
+atcoder-tools test -e "./main"
 testRes=$?
 echo "test exited with code $testRes"
 
@@ -48,6 +48,6 @@ if [ $testRes -ne 0 ]; then
 fi 
 
 echo "=== start submit ==="
-atcoder-tools submit -u --code ./main.swift -e "./AtcoderWorkspace"
+atcoder-tools submit -u --code ./main.swift -e "./main"
 
 exit 0

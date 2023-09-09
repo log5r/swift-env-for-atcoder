@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.7.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -18,13 +18,13 @@ let package = Package(
     ],
 
     targets: [
-       .target(
-            name: "AtcoderWorkspace",
+       .executableTarget(
+            name: "main",
             dependencies: [
                 .product(name: "Algorithms", package: "swift-algorithms"),
                 .product(name: "Collections", package: "swift-collections")
             ],
             path: "AtcoderWorkspace"
-        ),
+        )
     ]
 )
