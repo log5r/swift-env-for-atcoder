@@ -19,12 +19,12 @@ echo "copy from : $cppFrom"
 echo "copy to   : $cppTo"
 cp $cppFrom $cppTo
 
+echo "=== start compile: $testPath ==="
+sh build_main_source.sh
+cp "./.build/release/AtcoderWorkspace" "$testPath/AtcoderWorkspace"
 
+# process at problem directory
 cd $testPath || exit 9
 
-echo "=== start compile: $testPath ==="
-EXECPATH="main.swift"
-swiftc $EXECPATH
-
 echo "=== start test: $testPath ==="
-atcoder-tools test
+atcoder-tools test -e "./AtcoderWorkspace"

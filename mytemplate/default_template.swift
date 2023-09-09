@@ -46,6 +46,8 @@ func main() {
 
 main()
 
+// MARK: Library
+
 extension Array {
     func cumulate(from start: Element, _ method: (Element, Element) -> Element) -> [Element] {
         guard count > 0 else { return []}
@@ -54,6 +56,12 @@ extension Array {
             res[i + 1] = method(res[i], self[i])
         }
         return res
+    }
+}
+
+extension Array where Element: CustomStringConvertible {
+    func contestDescription(separator: String = " ") -> String {
+        self.map(\.description).joined(separator: separator)
     }
 }
 
@@ -104,7 +112,6 @@ extension Array where Element: Hashable {
         }
     }
 }
-
 extension BinaryInteger {
 
     func binaryDescription(bitWidth: Int? = nil) -> String {
@@ -119,7 +126,6 @@ extension BinaryInteger {
     }
 
 }
-
 extension Comparable {
 
     @discardableResult
@@ -139,12 +145,35 @@ extension Comparable {
         }
         return false
     }
-
+    
 }
-
 extension Int {
+
+    func zeroStartRange() -> Range<Int> { 0..<self }
+    func oneStartRange() -> Range<Int> { 1..<self }
+    func timesLoop(_ f:(Int) -> ()) {
+        for i in 0..<self { f(i) }
+    }
+
     func sqrt() -> Int {
         Int(Double(self).squareRoot())
+    }
+    
+    func prod(_ value: Int, mod: Int? = nil) -> Int {
+        let result: (Int, Int)
+        if value > self { result = (self, value)}
+        else { result = (value, self) }
+        var (a, b) = result
+        var res = 0
+        while b > 0 {
+            if (b & 1) != 0 { res += a }
+            if let m = mod { res %= m }
+            if let m = mod { a %= m }
+            a *= 2
+            if let m = mod { a %= m }
+            b >>= 1
+        }
+        return res
     }
 
     func pow(_ ex: Int, mod: Int? = nil) -> Int {
@@ -175,7 +204,6 @@ extension Int {
         return result.sorted()
     }
 }
-
 extension Character {
     func asciiIntValue() -> Int? {
         guard let ascv = asciiValue else { return nil }
@@ -194,9 +222,7 @@ extension Character {
 
 extension String {
     func values() -> [Character] { Array(self) }
-    func makeIterator() -> StringIterator {
-        StringIterator(string: self)
-    }
+
     func asciiIntValues() -> [Int]? {
         var res = [Int]()
         for v in values() {
@@ -227,15 +253,24 @@ extension String {
         return res
     }
 }
-
-struct StringIterator: IteratorProtocol {
-    let string: String
-    var index: Int = 0
-    public mutating func next() -> Character? {
-        let buf = string.values()
-        guard index < buf.count else { return nil }
-        defer { index += 1 }
-        return buf[index]
+struct CyclicArray<T> {
+    let array: Array<T>
+    init(_ array: Array<T>) {
+        self.array = array
+    }
+    subscript(index: Int) -> T {
+        let newIndex = ((index % array.count) + array.count) % array.count
+        return array[newIndex]
+    }
+    func arraySlice(fromIndex: Int, count: Int? = nil) -> ArraySlice<T> {
+        let c = count ?? array.count
+        let fi = ((fromIndex % array.count) + array.count) % array.count
+        var lpc = (c / array.count) + 1
+        var buf = array
+        while lpc > 0 {
+            buf += array
+            lpc -= 1
+        }
+        return buf[fi..<(fi + c)]
     }
 }
-

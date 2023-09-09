@@ -140,3 +140,12 @@ xcuserdata/
 abc*/
 arc*/
 agc*/
+
+# update for vscode etc
+main.o
+.vscode
+main.o.dSYM
+
+# update for swift 5.8.1 and SPM
+.build
+Package.resolved
