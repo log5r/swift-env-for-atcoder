@@ -9,7 +9,7 @@ lang='swift' # Check README.md for the supported languages.
 ### exec_on_each_problem_dir='clang-format -i ./*.cpp'
 ### exec_on_contest_dir='touch CMakeLists.txt'
 [compiler]
-compile_command='swiftc -Ounchecked'
+compile_command='swift build -Xswiftc -O -Xlinker -lm -c release'
 compile_only_when_diff_detected=true
 [tester]
 compile_before_testing=true
