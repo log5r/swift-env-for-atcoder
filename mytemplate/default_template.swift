@@ -43,6 +43,8 @@ func main() {
     solve({{ actual_arguments }})
     {% else %}
     // Failed to predict input format
+
+    var cin = Scanner()
     {% endif %}
 }
 
