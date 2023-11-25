@@ -1,8 +1,8 @@
 [codestyle]
 indent_type='space' # 'tab' or 'space'
 indent_width=4
-template_file='~/atcoder/swift-env/AtcoderWorkspace/mytemplate/default_template.swift'
-workspace_dir='~/atcoder/swift-env/AtcoderWorkspace/'
+template_file='YOUR_WORKSPACE_DIR/mytemplate/default_template.swift'
+workspace_dir='YOUR_WORKSPACE_DIR'
 lang='swift' # Check README.md for the supported languages.
 ### code_generator_file="~/custom_code_generator.py"
 [postprocess]
