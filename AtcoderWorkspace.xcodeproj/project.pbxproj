@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		32C578CCE39525FD518175E2 /* setup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = setup.sh; sourceTree = "<group>"; };
 		60C6E181DA7F9D25B5F548E5 /* TARGET_PROBLEM.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TARGET_PROBLEM.txt; sourceTree = SOURCE_ROOT; };
 		60C6E4AEF6E7A997259684A0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		60C6E98D084FAC7F142BEF26 /* qwe.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = qwe.sh; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 				60C6E1B9F2D7B7B9F0951A07 /* Products */,
 				60C6E7A78D9BB81C18EFFF44 /* AtcoderWorkspace */,
 				60C6E4AEF6E7A997259684A0 /* .gitignore */,
+				32C578CCE39525FD518175E2 /* setup.sh */,
 			);
 			sourceTree = "<group>";
 		};

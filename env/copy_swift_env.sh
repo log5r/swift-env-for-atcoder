@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-cp swift-atcodertools.toml ~/.atcodertools.toml
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+cp "$SCRIPT_DIR/swift-atcodertools.toml" ~/.atcodertools.toml
 
 envdir=~/.atcodertools-env/env
 rm -rf $envdir
