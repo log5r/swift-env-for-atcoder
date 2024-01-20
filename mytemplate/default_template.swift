@@ -102,6 +102,16 @@ extension Array where Element: Comparable {
         }
         return res
     }
+
+    func firstMaxIndex(after index: Int = 0) -> Int? {
+        guard let maxValue = self.max() else { return nil }
+        return self[index..<self.count].firstIndex(of: maxValue)
+    }
+
+    func firstMinIndex(after index: Int = 0) -> Int? {
+        guard let minValue = self.min() else { return nil }
+        return self[index..<self.count].firstIndex(of: minValue)
+    }
 }
 
 extension Array where Element: Hashable {
@@ -153,8 +163,8 @@ extension Comparable {
 }
 extension Int {
 
-    func zeroStartRange() -> Range<Int> { 0..<self }
-    func oneStartRange() -> Range<Int> { 1..<self }
+    func zeroStartRange() -> Range<Int> { 0..<(self > 0 ? self : 0) }
+    func oneStartRange() -> Range<Int> { 1..<(self > 1 ? self : 1) }
     func timesLoop(_ f:(Int) -> ()) {
         for i in 0..<self { f(i) }
     }
@@ -206,6 +216,27 @@ extension Int {
             i += 1
         }
         return result.sorted()
+    }
+}
+
+extension String {
+    func match(_ pattern: String) -> Bool {
+        matchedResult(pattern) != nil
+    }
+
+    func extractFirstMatched(_ pattern: String) -> [String] {
+        guard let matched = matchedResult(pattern) else { return [] }
+        return (0..<matched.numberOfRanges).compactMap { i -> String? in
+            let matchedRange = matched.range(at: i)
+            guard matchedRange.location != NSNotFound else { return nil }
+            return NSString(string: self).substring(with: matchedRange)
+        }
+    }
+
+    private func matchedResult(_ pattern: String) -> NSTextCheckingResult? {
+        let range = NSRange(location: 0, length: self.count)
+        let regex = try? NSRegularExpression(pattern: pattern)
+        return regex?.firstMatch(in: self, range: range)
     }
 }
 extension Character {
@@ -278,6 +309,7 @@ struct CyclicArray<T> {
         return buf[fi..<(fi + c)]
     }
 }
+
 struct Scanner {
     private var elements = [String]()
     private var index = 0
